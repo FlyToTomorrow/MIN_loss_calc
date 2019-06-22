@@ -1,0 +1,1 @@
+g++    -O3 -DNDEBUG -O3    -rdynamic CMakeFiles/switch_fabric.dir/src/Baseline.o CMakeFiles/switch_fabric.dir/src/BasicElements.o CMakeFiles/switch_fabric.dir/src/FODON.o CMakeFiles/switch_fabric.dir/src/Main.o CMakeFiles/switch_fabric.dir/src/StageSwitch.o  -o bin/switch_fabric 

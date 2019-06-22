@@ -1,1 +1,0 @@
-/home/zhifei/App/gcc72/bin/g++  -g   CMakeFiles/switch_fabric.dir/src/BasicElements.cpp.o CMakeFiles/switch_fabric.dir/src/FODON.cpp.o CMakeFiles/switch_fabric.dir/src/Main.cpp.o CMakeFiles/switch_fabric.dir/src/StageSwitch.cpp.o  -o switch_fabric 

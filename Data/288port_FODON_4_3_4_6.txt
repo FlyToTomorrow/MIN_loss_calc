@@ -1,2 +1,0 @@
-The worst-case loss is: 18.48 dB
-The average loss is: 12.9866 dB

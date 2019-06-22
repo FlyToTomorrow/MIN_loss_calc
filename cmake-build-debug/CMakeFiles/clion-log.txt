@@ -1,4 +1,0 @@
-/local/home/zhifei/App/clion-2019.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/zhifei/Program_Data/HW_project/switch_fabric
--- Configuring done
--- Generating done
--- Build files have been written to: /home/zhifei/Program_Data/HW_project/switch_fabric/cmake-build-debug

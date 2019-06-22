@@ -1,15 +1,30 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 2.4)
 project(switch_fabric)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+set(CMAKE_CXX_STANDARD 11)
+set(BIN_NAME "switch_fabric")
+
+SET(CMAKE_C_COMPILER gcc)
+SET(CMAKE_CXX_COMPILER g++)
+SET(GCC_BASIC_COMPILE_FLAGS "")
+SET(GCC_COVERAGE_LINK_FLAGS "") 
+# SET(GCC_BASIC_COMPILE_FLAGS "-g -m64 -Wall")
+# SET(GCC_COVERAGE_LINK_FLAGS    "-lstdc++  -lgsl -lgslcblas") 
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" ) 
+
 
 include_directories(src)
 
-add_executable(switch_fabric
-        src/BasicElements.cpp
-        src/BasicElements.h
-        src/FODON.cpp
-        src/FODON.h
-        src/Main.cpp
-        src/StageSwitch.cpp
-        src/StageSwitch.h src/Main.h)
+file(GLOB SOURCES "src/*.cpp")
+add_executable(${BIN_NAME} ${SOURCES}) 
+execute_process(COMMAND "${CMAKE_COMMAND}" -E create_symlink
+        ${CMAKE_BINARY_DIR}/bin/${BIN_NAME}
+        ${CMAKE_SOURCE_DIR}/${BIN_NAME})
+ 

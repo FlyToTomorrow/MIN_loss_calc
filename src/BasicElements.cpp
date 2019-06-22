@@ -55,12 +55,14 @@ void SimParaClass::GetParameterValues_FromInput(int argc, char *argv[])
     // ************************	handle the input parameters ************************
     switch (argc)
     {
+        case 5:
+            extra_setting_file = argv[4];
         case 4:
-            extra_setting_file = argv[3];
+            ParameterFileName = argv[3];
         case 3:
-            ParameterFileName = argv[2];
+            stage_switch_type = argv[2];
         case 2:
-            stage_switch_type = argv[1];
+            switch_type = argv[1];
         case 1:
             break;
         default:

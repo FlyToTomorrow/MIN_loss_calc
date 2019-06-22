@@ -2,6 +2,7 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
+#include "Baseline.h"
 #include "FODON.h"
 #include "Main.h"
 
@@ -19,11 +20,13 @@ int main(int argc, char *argv[])
     // vector<int> radix = {4, 3, 4, 6};
     vector<vector<int>> radix_list;
     read_radix_from_file(sim_para.extra_setting_file, radix_list);
+    MIN_Loss_Cal *p_oswitch_loss_cal;
     for (auto radix: radix_list)
     {
-        FODON_Loss_Cal oswitch_loss_cal(radix, sim_para.stage_switch_type);
-        oswitch_loss_cal.sweep_all_loss(sim_para);
-        oswitch_loss_cal.write_result();
+        p_oswitch_loss_cal = create_switch(sim_para, radix);
+        p_oswitch_loss_cal->sweep_all_loss(sim_para);
+        p_oswitch_loss_cal->write_result();
+        delete (p_oswitch_loss_cal);
     }
 
     double stop_s = (double) clock();
@@ -59,5 +62,23 @@ void read_radix_from_file(string filename, vector<vector<int>> &radix_list)
             }
         }
         // cout << "test" << endl;
+    }
+}
+
+MIN_Loss_Cal* create_switch(SimParaClass &sim_para, vector<int> &radix)
+{
+    if (sim_para.switch_type == "Baseline")
+    {
+        return new Baseline_Loss_Cal(
+                radix, sim_para.switch_type, sim_para.stage_switch_type);
+    }
+    else if (sim_para.switch_type == "FODON")
+    {
+        return new FODON_Loss_Cal(
+                radix, sim_para.switch_type, sim_para.stage_switch_type);
+    }
+    else{
+        cerr << "Error: Please specify correct switch type!!!" << endl;
+        exit(82);
     }
 }
