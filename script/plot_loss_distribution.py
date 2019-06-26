@@ -67,8 +67,8 @@ def main():
             worker = LossPlotClass(
                 radii, switch_type, stage_switch_type, data_path)
             worker.ReadData()
-            # worker.PlotLossDistibution()
-            worker.PlotLossHeatmap()
+            worker.PlotLossDistibution()
+            # worker.PlotLossHeatmap()
     # plt.show()
 
 
@@ -96,13 +96,15 @@ class LossPlotClass:
         self.loss_std = np.std(self.loss_list)
         self.max_loss = np.max(self.loss_list)
 
+        plt.figure()
+        ax = plt.axes()
         n, bins, patches = plt.hist(self.loss_list, **kwargs)
         plt.xlabel('Loss (dB)')
         plt.ylabel('Probability')
-        plt.text(
-            16, 0.37, 'ave={:.2f}\n $\sigma$={:.2f}\n max={:.2f}'.format(
-                self.ave_loss, self.loss_std, self.max_loss
-            ))
+        ax.text(0.05, 0.95,
+                'ave={:.2f}\n $\sigma$={:.2f}\n max={:.2f}'.format(
+                    self.ave_loss, self.loss_std, self.max_loss
+                ), transform=ax.transAxes, verticalalignment='top')
         plt.tight_layout()
         plt.savefig(fig_path + self.filename0 + fig_format,
                     dpi=fig_dvi, bbox_inches='tight')
